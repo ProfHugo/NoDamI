@@ -1,0 +1,16 @@
+[
+{
+  "modid": "nodami",
+  "name": "No Damage Immunity (NoDamI)",
+  "description": "Take all the damage!",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["ProfHugo"],
+  "credits": "ProfHugo, and thr Forge and FML team.",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
