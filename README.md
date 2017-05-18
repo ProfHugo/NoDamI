@@ -9,4 +9,8 @@ This mod aims to improve PvE and PvP by removing the redundant damage immunity s
     - Boss fights became very clunky, as one player would try to land a hit, only for it to be nullified because some guy with an 20+ damage axe landed it first
     - The original purpose of the damage immunity is now fulfilled by this new attack speed system
     - This mod completely removes this old system by setting the damage immunity timer to 0 on update, and to compensate for any potential one-shots due to DOTs that relied on the old system to be balanced (such as lava and cactus, but there are more), the damage is cut down by 20 times per tick to match the old values.
+    
+## Supported Versions:
+	- 1.10.2
+	- 1.11.2
 
