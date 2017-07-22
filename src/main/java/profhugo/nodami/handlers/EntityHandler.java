@@ -14,7 +14,8 @@ public class EntityHandler {
 		DamageSource source = event.getSource();
 		//May have more DoTs missing in this list
 		if (source.equals(DamageSource.IN_FIRE) || source.equals(DamageSource.LAVA) || source.equals(DamageSource.CACTUS)
-				|| source.equals(DamageSource.LIGHTNING_BOLT) || source.equals(DamageSource.IN_WALL)) {
+				|| source.equals(DamageSource.LIGHTNING_BOLT) || source.equals(DamageSource.IN_WALL)
+				|| source.equals(DamageSource.HOT_FLOOR)) {
 			event.setAmount(event.getAmount() / 10);
 		}
 		entity.hurtResistantTime = 0;
