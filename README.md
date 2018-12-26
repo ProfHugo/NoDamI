@@ -1,12 +1,12 @@
 # NoDamI
 
-##About:
+## About:
 This mod aims to improve PvE and PvP by removing/changing the redundant damage immunity system implemeted by Mojang long ago, without breaking the game.
 (more info on damage immunity here:http://minecraft.gamepedia.com/Damage#Damage_immunity)
 
  
 
-##Features:
+## Features:
 
 - Damage events in Minecraft no longer give i-frames by default.
 
@@ -20,7 +20,7 @@ This mod aims to improve PvE and PvP by removing/changing the redundant damage i
 
  
 
-##Config:
+## Config:
 
 This mod generates a config file for users to change parts of the mod as they see fit. There are config options for the following:
 
