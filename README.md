@@ -48,7 +48,7 @@ In addition, you can also add an entire mod's entities by adding in its modid, f
 
  
 
-##But Why?
+## But Why?
 
 Before 1.9, players used to be able to attack pretty much whenever they wanted, and to pervent insta-kills, Mojang implemented a system of conditional damage immunity where, after taking damage, the entity would be immune to any further damage of equal or lesser amounts for 0.5 seconds, and if the incoming damage is higher, the difference gets counted. Therefor, damage output was only limited to how fast you could spam click and get damage in whenever something is out of i-frames. 
 
@@ -70,7 +70,7 @@ PS: To top that all off, most gun mods doesn't even function properly with damag
 
  
 
-##Modpack Policy:
+## Modpack Policy:
 
 You can use this mod however you want. However, please put the name of this mod and my name onto the modlist of the modpack. While not needed, it'd be nice to let me know if you're going to use this in a modpack, especially if it's not hosted on Curseforge.
 
