@@ -22,29 +22,51 @@ public class EntityHandler {
 			if (entity.getEntityWorld().isRemote) {
 				return;
 			}
+			if (NodamiConfig.excludePlayers && entity instanceof EntityPlayer) {
+				return;
+			}
+			if (NodamiConfig.excludeAllMobs && !(entity instanceof EntityPlayer)) {
+				return;
+			}
 			for (String id : NodamiConfig.dmgReceiveExcludedEntities) {
 				ResourceLocation loc = EntityList.getKey(entity.getClass());
-				if (loc != null && loc.toString().equals(id)) {
+				if (loc == null)
+					break;
+				int starIndex = id.indexOf('*');
+				if (starIndex != -1) {
+					if (loc.toString().indexOf(id.substring(0, starIndex)) != -1) {
+						return;
+					}
+				} else if (loc.toString().equals(id)) {
 					return;
 				}
 			}
 			DamageSource source = event.getSource();
 			// May have more DoTs missing in this list
-			if (source.equals(DamageSource.IN_FIRE) || source.equals(DamageSource.LAVA)
+			if (NodamiConfig.enviromentalHazardsBalancing && (source.equals(DamageSource.IN_FIRE) || source.equals(DamageSource.LAVA)
 					|| source.equals(DamageSource.CACTUS) || source.equals(DamageSource.LIGHTNING_BOLT)
-					|| source.equals(DamageSource.IN_WALL)) {
+					|| source.equals(DamageSource.IN_WALL))) {
 				return;
 			}
+			
 			// Mobs that do damage on collusion but have no attack timer
 			for (String id : NodamiConfig.attackExcludedEntities) {
-				if (source.getTrueSource() != null) {
-					ResourceLocation loc = EntityList.getKey(source.getTrueSource().getClass());
-					if (loc != null && loc.toString().equals(id)) {
+				if (source.getTrueSource() == null)
+					break;
+				ResourceLocation loc = EntityList.getKey(source.getTrueSource().getClass());
+				if (loc == null)
+					break;
+				int starIndex = id.indexOf('*');
+				if (starIndex != -1) {
+					if (loc.toString().indexOf(id.substring(0, starIndex)) != -1) {
 						return;
 					}
+				} else if (loc.toString().equals(id)) {
+					return;
 				}
+
 			}
-			entity.hurtResistantTime = 0;
+			entity.hurtResistantTime = NodamiConfig.iFrameInterval;
 		}
 	}
 
@@ -61,18 +83,18 @@ public class EntityHandler {
 				return;
 			}
 			if (str <= NodamiConfig.knockbackCancelThreshold) {
-				//Don't worry, it's only magic
+				// Don't worry, it's only magic
 				player.hurtTime = -1;
 			}
 		}
 	}
-	
+
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void onKnockback(LivingKnockBackEvent event) {
 		if (!event.isCanceled()) {
 			Entity attacker = event.getAttacker();
 			if (attacker != null && !attacker.getEntityWorld().isRemote) {
-				//IT'S ONLY MAGIC
+				// IT'S ONLY MAGIC
 				if (attacker instanceof EntityPlayer && ((EntityPlayer) attacker).hurtTime == -1) {
 					event.setCanceled(true);
 					((EntityPlayer) attacker).hurtTime = 0;
