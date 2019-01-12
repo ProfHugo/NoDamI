@@ -6,6 +6,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
@@ -21,6 +22,13 @@ public class EntityHandler {
 			EntityLivingBase entity = event.getEntityLiving();
 			if (entity.getEntityWorld().isRemote) {
 				return;
+			}
+			DamageSource source = event.getSource();
+			if (NodamiConfig.debugMode && entity instanceof EntityPlayer) {
+				String message = String.format("Type of damage received: %s\nAmount: %.3f\nTrue Source (mob id): %s\n",
+						source.getDamageType(), event.getAmount(), source.getTrueSource() == null ? "null"
+								: EntityList.getKey(source.getTrueSource().getClass()).toString());
+				((EntityPlayer) entity).sendMessage(new TextComponentString(message));
 			}
 			if (NodamiConfig.excludePlayers && entity instanceof EntityPlayer) {
 				return;
@@ -41,14 +49,14 @@ public class EntityHandler {
 					return;
 				}
 			}
-			DamageSource source = event.getSource();
 			// May have more DoTs missing in this list
-			if (NodamiConfig.enviromentalHazardsBalancing && (source.equals(DamageSource.IN_FIRE) || source.equals(DamageSource.LAVA)
-					|| source.equals(DamageSource.CACTUS) || source.equals(DamageSource.LIGHTNING_BOLT)
-					|| source.equals(DamageSource.IN_WALL))) {
-				return;
+			// Not anymore (/s)
+			for (String dmgType : NodamiConfig.damageSrcWhitelist) {
+				if (source.getDamageType().equals(dmgType)) {
+					return;
+				}
 			}
-			
+
 			// Mobs that do damage on collusion but have no attack timer
 			for (String id : NodamiConfig.attackExcludedEntities) {
 				if (source.getTrueSource() == null)
