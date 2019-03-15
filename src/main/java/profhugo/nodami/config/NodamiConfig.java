@@ -36,7 +36,7 @@ public class NodamiConfig {
 		
 		attackExcludedEntities = config.getStringList("attackExcludedEntities", "exclusions", new String[] {"minecraft:slime", "tconstruct:blueslime", "thaumcraft:thaumslime", "grimoireofgaia:*"}, "List of entities that need to give i-frames on attacking");
 		dmgReceiveExcludedEntities = config.getStringList("damageReceiveExcludedEntities", "exclusions", new String[0], "List of entities that need to receive i-frames on receiving attacks or relies on iFrames");
-		damageSrcWhitelist = config.getStringList("dmgSrcWhitelist", "exclusions", new String[] {"inFire", "lava", "cactus", "lightningBolt", "inWall"}, "List of damage sources that need to give i-frames on doing damage (ex: lava).");
+		damageSrcWhitelist = config.getStringList("dmgSrcWhitelist", "exclusions", new String[] {"inFire", "lava", "cactus", "lightningBolt", "inWall", "hotFloor"}, "List of damage sources that need to give i-frames on doing damage (ex: lava).");
 		
 		debugMode = config.getBoolean("debugMode", "misc", false, "If true, turns on feature which sends a message when a player receives damage, containing information such as the name of the source and the quantity. Use this to find the name of the source you need to whitelist, or the id of the mob you want to exclude.");
 		
