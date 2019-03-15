@@ -12,7 +12,7 @@ public class NoDamI {
 	
 	public static final String MODID = "nodami";
 	public static final String NAME = "No Damage Immunity";
-	public static final String VERSION = "1.3";
+	public static final String VERSION = "1.2.1";
 
 	@Mod.Instance(MODID)
 	public static NoDamI instance;
