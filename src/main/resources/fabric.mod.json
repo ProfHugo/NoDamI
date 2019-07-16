@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "nodami",
+  "version": "${version}",
+
+  "name": "No Damage Immunity (NoDamI)",
+  "description": "I-frames big bad. Me no likey i-frames so they gone now.",
+  "authors": [
+    "ProfHugo"
+  ],
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/nodami",
+    "sources": "https://github.com/ProfHugo/NoDamI"
+  },
+
+  "license": "GNU General Public License Version 3",
+  "icon": "assets/nodami/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.profhugo.nodami.NoDamI"
+    ]
+  },
+  "mixins": [
+    "nodami.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.4.0",
+    "fabric": "*"
+  },
+  "suggests": {
+  }
+}
