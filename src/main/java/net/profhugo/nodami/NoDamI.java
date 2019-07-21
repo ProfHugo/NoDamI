@@ -98,7 +98,7 @@ public class NoDamI implements ModInitializer {
 			if (entity.getEntityWorld().isClient) {
 				return ActionResult.PASS;
 			}
-			if (source != null && !source.getEntityWorld().isClient) {
+			if (source != null) {
 				// IT'S ONLY MAGIC
 				if (source instanceof ServerPlayerEntity && ((ServerPlayerEntity) source).hurtTime == -1) {
 					((ServerPlayerEntity) source).hurtTime = 0;
