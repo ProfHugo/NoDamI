@@ -23,6 +23,10 @@ public class NodamiConfig {
 		public float attackCancelThreshold, knockbackCancelThreshold;
 		public String[] attackExcludedEntities, dmgReceiveExcludedEntities, damageSrcWhitelist;
 		
+		public ConfigCarrier() {
+			this.setToDefault();
+		}
+		
 		private void setToDefault() {
 			iFrameInterval = 0;
 			excludePlayers = false;
@@ -55,7 +59,6 @@ public class NodamiConfig {
 
 	private static void setToDefault() {
 		ConfigCarrier temp = new ConfigCarrier();
-		temp.setToDefault();
 		setToCarrier(temp);
 	}
 
@@ -74,7 +77,7 @@ public class NodamiConfig {
 				int firstEntryIndex = dump.indexOf("attackCancelThreshold");
 				if (dump.indexOf("attackCancelThreshold") > 0 || dump.indexOf("attackCancelThreshold") < dump.length()) {
 					System.out.println("NoDamI: Done reading config files. Here are the loaded settings:");
-					System.out.println("/n" + dump.substring(firstEntryIndex));
+					System.out.println("\n" + dump.substring(firstEntryIndex));
 				} else {
 					System.out.println("NoDamI: Warning, config file may potentially be corrupted. Loading default values.");
 					setToDefault();
@@ -90,14 +93,12 @@ public class NodamiConfig {
 		} else {
 			System.out.println("NoDamI: Did not found config file. Writing first time config file...");
 			ConfigCarrier firstTime = new ConfigCarrier();
-			firstTime.setToDefault();
 			try {
 				FileWriter writer = new FileWriter(configFile);
 				writer.write(yamlParser.dump(firstTime));
 				writer.close();
-				
 				System.out.println("NoDamI: Done writing first time config file.");
-				
+				setToCarrier(firstTime);
 			} catch (IOException e) {
 				e.printStackTrace();
 				System.out.println("NoDamI: Caught exception while writing first time config file. Loading default values.");
