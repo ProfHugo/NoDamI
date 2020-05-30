@@ -16,7 +16,7 @@ import profhugo.nodami.config.NodamiConfig;
 
 public class EntityHandler {
 
-	@SubscribeEvent(priority = EventPriority.LOWEST)
+	@SubscribeEvent(priority = EventPriority.LOW)
 	public void onEntityHurt(LivingHurtEvent event) {
 		if (!event.isCanceled()) {
 			EntityLivingBase entity = event.getEntityLiving();
@@ -30,50 +30,32 @@ public class EntityHandler {
 								: EntityList.getKey(source.getTrueSource().getClass()).toString());
 				((EntityPlayer) entity).sendMessage(new TextComponentString(message));
 			}
+			
 			if (NodamiConfig.excludePlayers && entity instanceof EntityPlayer) {
 				return;
 			}
+			
 			if (NodamiConfig.excludeAllMobs && !(entity instanceof EntityPlayer)) {
 				return;
 			}
-			for (String id : NodamiConfig.dmgReceiveExcludedEntities) {
-				ResourceLocation loc = EntityList.getKey(entity.getClass());
-				if (loc == null)
-					break;
-				int starIndex = id.indexOf('*');
-				if (starIndex != -1) {
-					if (loc.toString().indexOf(id.substring(0, starIndex)) != -1) {
-						return;
-					}
-				} else if (loc.toString().equals(id)) {
-					return;
-				}
+			
+			ResourceLocation loc = EntityList.getKey(entity.getClass());
+			if (loc != null && NodamiConfig.dmgReceiveExcludedEntities.contains(loc.toString())) {
+				return;
 			}
+			
 			// May have more DoTs missing in this list
 			// Not anymore (/s)
-			for (String dmgType : NodamiConfig.damageSrcWhitelist) {
-				if (source.getDamageType().equals(dmgType)) {
-					return;
-				}
+			if (NodamiConfig.damageSrcWhitelist.contains(source.getDamageType())) {
+				return;
 			}
 
 			// Mobs that do damage on collusion but have no attack timer
-			for (String id : NodamiConfig.attackExcludedEntities) {
-				if (source.getTrueSource() == null)
-					break;
-				ResourceLocation loc = EntityList.getKey(source.getTrueSource().getClass());
-				if (loc == null)
-					break;
-				int starIndex = id.indexOf('*');
-				if (starIndex != -1) {
-					if (loc.toString().indexOf(id.substring(0, starIndex)) != -1) {
-						return;
-					}
-				} else if (loc.toString().equals(id)) {
-					return;
-				}
-
+			loc = EntityList.getKey(source.getTrueSource().getClass());
+			if (loc != null && NodamiConfig.attackExcludedEntities.contains(loc.toString())) {
+				return;
 			}
+			
 			entity.hurtResistantTime = NodamiConfig.iFrameInterval;
 		}
 	}

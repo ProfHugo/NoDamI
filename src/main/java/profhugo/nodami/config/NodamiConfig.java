@@ -1,6 +1,9 @@
 package profhugo.nodami.config;
 
 import java.io.File;
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.HashSet;
 
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Loader;
@@ -13,7 +16,7 @@ public class NodamiConfig {
 	public static boolean excludePlayers, excludeAllMobs, debugMode;
 	public static float attackCancelThreshold, knockbackCancelThreshold;
 	
-	public static String[] attackExcludedEntities, dmgReceiveExcludedEntities, damageSrcWhitelist;
+	public static HashSet<String> attackExcludedEntities, dmgReceiveExcludedEntities, damageSrcWhitelist;
 	
 	public static void preInit() {
 		File configFile = new File(Loader.instance().getConfigDir(), "nodami.cfg");
@@ -34,9 +37,9 @@ public class NodamiConfig {
 		attackCancelThreshold = config.getFloat("attackCancelThreshold", "thresholds", 0.1f, -0.1f, 1, "How weak a player's attack can be before it gets nullified, from 0 (0%, cancels multiple attacks on the same tick) to 1 (100%, players cannot attack), or -0.1 (disables this feature)");
 		knockbackCancelThreshold = config.getFloat("knockbackCancelThreshold", "thresholds", 0.75f, -0.1f, 1, "How weak a player's attack can be before the knockback gets nullified, from 0 (0%, cancels multiple attacks on the same tick) to 1 (100%, no knockback), or -0.1 (disables this feature)");
 		
-		attackExcludedEntities = config.getStringList("attackExcludedEntities", "exclusions", new String[] {"minecraft:slime", "tconstruct:blueslime", "thaumcraft:thaumslime", "grimoireofgaia:*"}, "List of entities that need to give i-frames on attacking");
-		dmgReceiveExcludedEntities = config.getStringList("damageReceiveExcludedEntities", "exclusions", new String[0], "List of entities that need to receive i-frames on receiving attacks or relies on iFrames");
-		damageSrcWhitelist = config.getStringList("dmgSrcWhitelist", "exclusions", new String[] {"inFire", "lava", "cactus", "lightningBolt", "inWall", "hotFloor"}, "List of damage sources that need to give i-frames on doing damage (ex: lava).");
+		attackExcludedEntities = new HashSet<>(Arrays.asList(config.getStringList("attackExcludedEntities", "exclusions", new String[] {"minecraft:slime", "tconstruct:blueslime", "thaumcraft:thaumslime", "grimoireofgaia:*"}, "List of entities that need to give i-frames on attacking")));
+		dmgReceiveExcludedEntities = new HashSet<>(Arrays.asList(config.getStringList("damageReceiveExcludedEntities", "exclusions", new String[0], "List of entities that need to receive i-frames on receiving attacks or relies on iFrames")));
+		damageSrcWhitelist = new HashSet<>(Arrays.asList(config.getStringList("dmgSrcWhitelist", "exclusions", new String[] {"inFire", "lava", "cactus", "lightningBolt", "inWall", "hotFloor"}, "List of damage sources that need to give i-frames on doing damage (ex: lava).")));
 		
 		debugMode = config.getBoolean("debugMode", "misc", false, "If true, turns on feature which sends a message when a player receives damage, containing information such as the name of the source and the quantity. Use this to find the name of the source you need to whitelist, or the id of the mob you want to exclude.");
 		
