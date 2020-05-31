@@ -51,10 +51,14 @@ public class EntityHandler {
 			}
 
 			// Mobs that do damage on collusion but have no attack timer
-			loc = EntityList.getKey(source.getTrueSource().getClass());
-			if (loc != null && NodamiConfig.attackExcludedEntities.contains(loc.toString())) {
-				return;
+			Entity trueSource = source.getTrueSource();
+			if (trueSource != null) {
+				loc = EntityList.getKey(trueSource.getClass());
+				if (loc != null && NodamiConfig.attackExcludedEntities.contains(loc.toString())) {
+					return;
+				}
 			}
+			
 			
 			entity.hurtResistantTime = NodamiConfig.iFrameInterval;
 		}
