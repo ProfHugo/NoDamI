@@ -1,0 +1,11 @@
+modLoader="javafml"
+loaderVersion="[32,)"
+
+[[mods]]
+	modId="nodami"
+	version="${file.jarVersion}"
+	displayName="No Damage Immunity (NoDamI)"
+	authors="ProfHugo" 
+	description='''
+Enables the removal and/or adjustment of the Minecraft i-frame mechanic.
+	'''

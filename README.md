@@ -75,6 +75,8 @@ PS: To top that all off, most gun mods doesn't even function properly with damag
 You can use this mod however you want. However, please put the name of this mod and my name onto the modlist of the modpack. While not needed, it'd be nice to let me know if you're going to use this in a modpack, especially if it's not hosted on Curseforge.
 
 ## Supported Versions:
-	- 1.7.10
-	- 1.12.2
+	- 1.7.10 Forge
+	- 1.12.2 Forge
+	- 1.14.2 Fabric
+	- 1.16.1 Forge
 
