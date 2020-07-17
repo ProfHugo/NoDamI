@@ -24,10 +24,16 @@ public class EntityHandler {
 				return;
 			}
 			DamageSource source = event.getSource();
+			Entity trueSource = source.getTrueSource();
 			if (NodamiConfig.debugMode && entity instanceof EntityPlayer) {
+				String trueSourceName;
+				if (trueSource != null && EntityList.getKey(trueSource.getClass()) != null) {
+					trueSourceName = EntityList.getKey(trueSource.getClass()).toString();
+				} else {
+					trueSourceName = "null";
+				}
 				String message = String.format("Type of damage received: %s\nAmount: %.3f\nTrue Source (mob id): %s\n",
-						source.getDamageType(), event.getAmount(), source.getTrueSource() == null ? "null"
-								: EntityList.getKey(source.getTrueSource().getClass()).toString());
+						source.getDamageType(), event.getAmount(), trueSourceName);
 				((EntityPlayer) entity).sendMessage(new TextComponentString(message));
 			}
 			
@@ -51,7 +57,6 @@ public class EntityHandler {
 			}
 
 			// Mobs that do damage on collusion but have no attack timer
-			Entity trueSource = source.getTrueSource();
 			if (trueSource != null) {
 				loc = EntityList.getKey(trueSource.getClass());
 				if (loc != null && NodamiConfig.attackExcludedEntities.contains(loc.toString())) {
