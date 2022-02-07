@@ -1,0 +1,24 @@
+{
+  "mappings": {
+    "net/profhugo/nodami/mixin/PlayerEntityMixin": {
+      "applyDamage": "Lnet/minecraft/class_1657;method_6074(Lnet/minecraft/class_1282;F)V",
+      "attack": "Lnet/minecraft/class_1657;method_7324(Lnet/minecraft/class_1297;)V"
+    },
+    "net/profhugo/nodami/mixin/LivingEntityMixin": {
+      "applyDamage": "Lnet/minecraft/class_1309;method_6074(Lnet/minecraft/class_1282;F)V",
+      "takeKnockback": "Lnet/minecraft/class_1309;method_6005(DDD)V"
+    }
+  },
+  "data": {
+    "named:intermediary": {
+      "net/profhugo/nodami/mixin/PlayerEntityMixin": {
+        "applyDamage": "Lnet/minecraft/class_1657;method_6074(Lnet/minecraft/class_1282;F)V",
+        "attack": "Lnet/minecraft/class_1657;method_7324(Lnet/minecraft/class_1297;)V"
+      },
+      "net/profhugo/nodami/mixin/LivingEntityMixin": {
+        "applyDamage": "Lnet/minecraft/class_1309;method_6074(Lnet/minecraft/class_1282;F)V",
+        "takeKnockback": "Lnet/minecraft/class_1309;method_6005(DDD)V"
+      }
+    }
+  }
+}
